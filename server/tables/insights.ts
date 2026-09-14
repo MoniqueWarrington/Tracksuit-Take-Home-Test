@@ -1,5 +1,5 @@
-export const createTable = `
-  CREATE TABLE insights (
+export const createTable = ` 
+CREATE TABLE IF NOT EXISTS insights (
     id INTEGER PRIMARY KEY ASC NOT NULL,
     brand INTEGER NOT NULL,
     createdAt TEXT NOT NULL,
