@@ -15,7 +15,7 @@ describe("Modal", () => {
 
   it("renders when open", () => {
     render(
-      <Modal open={true} onClose={() => undefined}>
+      <Modal open onClose={() => undefined}>
         <div>Open modal</div>
       </Modal>,
     );

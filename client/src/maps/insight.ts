@@ -1,4 +1,4 @@
-import { Insight } from "../schemas/insight";
+import type { Insight } from "../schemas/insight.ts";
 
 type ApiInsight = {
   id: number;

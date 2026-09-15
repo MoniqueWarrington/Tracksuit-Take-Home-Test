@@ -11,14 +11,14 @@ type InsightsProps = {
 };
 
 export const Insights = ({
-    insights,
-    className,
-    onInsightDeleted,
-  }: InsightsProps) => {
-    const handleDeleteInsight = async (id: number) => {
-      await deleteInsightApi(id);
-      onInsightDeleted();
-    };
+  insights,
+  className,
+  onInsightDeleted,
+}: InsightsProps) => {
+  const handleDeleteInsight = async (id: number) => {
+    await deleteInsightApi(id);
+    onInsightDeleted();
+  };
 
   return (
     <div className={cx(className)}>
@@ -35,7 +35,8 @@ export const Insights = ({
                     <button
                       type="button"
                       className={styles["insight-delete"]}
-                      onClick={() => handleDeleteInsight(id)}
+                      onClick={() =>
+                        handleDeleteInsight(id)}
                     >
                       <Trash2Icon />
                     </button>

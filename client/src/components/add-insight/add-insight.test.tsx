@@ -6,9 +6,7 @@ import { AddInsight } from "./add-insight.tsx";
 import { BRANDS } from "../../lib/consts.ts";
 
 vi.mock("../modal/modal.tsx", () => ({
-  Modal: ({ children }: { children: ReactNode }) => (
-    <div>{children}</div>
-  ),
+  Modal: ({ children }: { children: ReactNode }) => <div>{children}</div>,
 }));
 
 afterEach(() => {
@@ -20,7 +18,7 @@ describe("add insight", () => {
   it("renders", () => {
     const { getByText } = render(
       <AddInsight
-        open={true}
+        open
         onClose={vi.fn()}
         onCreated={vi.fn()}
       />,
@@ -33,7 +31,7 @@ describe("add insight", () => {
   it("renders all brands", () => {
     const { getByRole } = render(
       <AddInsight
-        open={true}
+        open
         onClose={vi.fn()}
         onCreated={vi.fn()}
       />,
