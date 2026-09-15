@@ -19,7 +19,6 @@ const TEST_INSIGHTS = [
 
 describe("insights", () => {
   it("renders", () => {
-    ///Type error - ID Missing
     const { getByText } = render(<Insights insights={TEST_INSIGHTS} />);
     expect(getByText(TEST_INSIGHTS[0].text)).toBeTruthy();
   });
