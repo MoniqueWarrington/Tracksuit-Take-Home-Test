@@ -2,7 +2,7 @@ import { BRANDS } from "../../lib/consts.ts";
 import { Button } from "../button/button.tsx";
 import { Modal, type ModalProps } from "../modal/modal.tsx";
 import styles from "./add-insight.module.css";
-import { createInsight } from "../../api/create-insight.ts";
+import { createInsight } from "../../services/create-insight.ts";
 import type { FormEvent } from "react";
 
 type AddInsightProps = ModalProps & {

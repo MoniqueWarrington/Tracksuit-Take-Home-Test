@@ -20,5 +20,6 @@ export type Insert = {
   text: string;
 };
 
+// potentially SQL injection vulnerable because values are being interpolated directly into SQL.
 export const insertStatement = (item: Insert) =>
   `INSERT INTO insights (brand, createdAt, text) VALUES (${item.brand}, '${item.createdAt}', '${item.text}')`;
