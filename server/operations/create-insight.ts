@@ -1,6 +1,6 @@
 import type { Insight } from "$models/insight.ts";
 import type { HasDBClient } from "../shared.ts";
-import type * as insightsTable from "$tables/insights.ts";
+import lookupInsight from "./lookup-insight.ts";
 
 type Input = HasDBClient & {
   brand: number;
@@ -8,22 +8,37 @@ type Input = HasDBClient & {
 };
 
 export default (input: Input): Insight => {
-  console.log(`Creating insight for brand=${input.brand}`);
+  console.log(`Creating insight for brand=${input.brand}, text=${input.text}`);
 
   const createdAt = new Date().toISOString();
 
-  const [row] = input.db.sql<insightsTable.Row>`
+  input.db.sql`
     INSERT INTO insights (brand, createdAt, text)
     VALUES (${input.brand}, ${createdAt}, ${input.text})
-    RETURNING *
-    `;
+  `;
+
+  const [row] = input.db.sql<{ id: number }>`
+    SELECT id
+    FROM insights
+    WHERE brand = ${input.brand}
+      AND createdAt = ${createdAt}
+      AND text = ${input.text}
+    ORDER BY id DESC
+    LIMIT 1
+  `;
 
   if (!row) {
     throw new Error("Failed to create insight");
   }
 
-  return {
-    ...row,
-    createdAt: new Date(row.createdAt),
-  };
+  const result = lookupInsight({
+    db: input.db,
+    id: row.id,
+  });
+
+  if (!result) {
+    throw new Error("Failed to retrieve created insight");
+  }
+
+  return result;
 };

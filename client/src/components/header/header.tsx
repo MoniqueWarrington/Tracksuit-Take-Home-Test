@@ -3,9 +3,13 @@ import { Button } from "../button/button.tsx";
 import styles from "./header.module.css";
 import { AddInsight } from "../add-insight/add-insight.tsx";
 
+type HeaderProps = {
+  onInsightCreated(): void;
+};
+
 export const HEADER_TEXT = "Suit Tracker Insights";
 
-export const Header = () => {
+export const Header = ({ onInsightCreated }: HeaderProps) => {
   const [addInsightOpen, setAddInsightOpen] = useState(false);
 
   return (
@@ -20,9 +24,11 @@ export const Header = () => {
           />
         </div>
       </header>
+
       <AddInsight
         open={addInsightOpen}
         onClose={() => setAddInsightOpen(false)}
+        onCreated={onInsightCreated}
       />
     </>
   );

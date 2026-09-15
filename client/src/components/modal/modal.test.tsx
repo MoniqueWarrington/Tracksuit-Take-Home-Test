@@ -3,19 +3,23 @@ import { describe, expect, it } from "vitest";
 import { Modal } from "./modal.tsx";
 
 describe("Modal", () => {
-  it("should open and close", () => {
+  it("does not render when closed", () => {
     render(
       <Modal open={false} onClose={() => undefined}>
         Closed modal
       </Modal>,
     );
-    expect(screen.queryByText("Closed modal")).toBeFalsy();
 
+    expect(screen.queryByText("Closed modal")).toBeFalsy();
+  });
+
+  it("renders when open", () => {
     render(
       <Modal open={true} onClose={() => undefined}>
         <div>Open modal</div>
       </Modal>,
     );
+
     expect(screen.getByText("Open modal")).toBeTruthy();
   });
 });
