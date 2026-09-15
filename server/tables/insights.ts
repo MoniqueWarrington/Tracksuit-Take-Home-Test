@@ -1,5 +1,5 @@
-export const createTable = `
-  CREATE TABLE insights (
+export const createTable = ` 
+CREATE TABLE IF NOT EXISTS insights (
     id INTEGER PRIMARY KEY ASC NOT NULL,
     brand INTEGER NOT NULL,
     createdAt TEXT NOT NULL,
@@ -20,5 +20,6 @@ export type Insert = {
   text: string;
 };
 
+// potentially SQL injection vulnerable because values are being interpolated directly into SQL.
 export const insertStatement = (item: Insert) =>
   `INSERT INTO insights (brand, createdAt, text) VALUES (${item.brand}, '${item.createdAt}', '${item.text}')`;
